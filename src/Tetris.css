@@ -1,0 +1,24 @@
+.tetris-board {
+    display: grid;
+    grid-template-rows: repeat(20, 20px); /* 20 filas de 20px cada una */
+    grid-template-columns: repeat(10, 20px); /* 10 columnas de 20px cada una */
+    gap: 1px; /* Separación entre celdas */
+    background-color: #000; /* Fondo negro para el tablero */
+    border: 2px solid #333; /* Borde alrededor del tablero */
+  }
+
+  .tetris-row {
+    display: contents; /* Cada fila se ajustará automáticamente al grid */
+  }
+
+  .tetris-cell {
+    width: 20px;
+    height: 20px;
+    background-color: #111; /* Color base de las celdas */
+    border: 1px solid #222; /* Borde entre celdas */
+  }
+
+  .tetris-cell.block {
+    background-color: #f39c12; /* Color del bloque activo */
+    border: 1px solid #e67e22; /* Borde del bloque activo */
+  }
