@@ -1,24 +1,69 @@
+/* Tetris.css */
+
+/* Layout */
+.tetris-wrapper {
+  display: grid;
+  grid-template-columns: 220px auto;
+  gap: 16px;
+  align-items: start;
+  justify-content: center;
+}
+
+.tetris-hud {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  color: #ddd;
+}
+
+.tetris-over {
+  font-weight: 700;
+  color: #ff4d4d;
+}
+
+/* Board: fixed size, no gaps, grid drawn via background to avoid misalignments */
 .tetris-board {
-    display: grid;
-    grid-template-rows: repeat(20, 20px); /* 20 filas de 20px cada una */
-    grid-template-columns: repeat(10, 20px); /* 10 columnas de 20px cada una */
-    gap: 1px; /* Separación entre celdas */
-    background-color: #000; /* Fondo negro para el tablero */
-    border: 2px solid #333; /* Borde alrededor del tablero */
-  }
+  position: relative;
+  width: 240px;   /* 10 cols * 24px */
+  height: 480px;  /* 20 rows * 24px */
+  display: grid;
+  grid-template-columns: repeat(10, 24px);
+  grid-template-rows: repeat(20, 24px);
+  /* draw subtle grid lines */
+  background-color: #0f0f10;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border: 2px solid #2c2c2c;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0,0,0,.45);
+}
 
-  .tetris-row {
-    display: contents; /* Cada fila se ajustará automáticamente al grid */
-  }
+.tetris-row { display: contents; }
 
-  .tetris-cell {
-    width: 20px;
-    height: 20px;
-    background-color: #111; /* Color base de las celdas */
-    border: 1px solid #222; /* Borde entre celdas */
-  }
+.tetris-cell {
+  width: 24px;
+  height: 24px;
+  /* no borders here to keep exact math */
+  background: transparent;
+  border-radius: 2px;
+}
 
-  .tetris-cell.block {
-    background-color: #f39c12; /* Color del bloque activo */
-    border: 1px solid #e67e22; /* Borde del bloque activo */
-  }
+/* Filled cells + palette */
+.tetris-cell.filled { outline: 1px solid rgba(255,255,255,.12); }
+.color-1 { background: #4cc9f0; } /* I */
+.color-2 { background: #ffea00; } /* O */
+.color-3 { background: #b5179e; } /* T */
+.color-4 { background: #43aa8b; } /* S */
+.color-5 { background: #f94144; } /* Z */
+.color-6 { background: #577590; } /* J */
+.color-7 { background: #f8961e; } /* L */
+
+.tetris-help {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 8px;
+  opacity: .8;
+  font-size: 0.95rem;
+}
