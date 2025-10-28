@@ -1,97 +1,46 @@
 // App.jsx
-// New landing with a hero, "Mini Arcade" (Tetris), and a simple footer.
+// App layout with top nav and nested routes for the Arcade tabs.
 
-import { useState } from "react";
-import Tetris from "./Tetris";
+import { Suspense, lazy } from "react";
+import { NavLink, Outlet, Route, Routes } from "react-router-dom";
 import "./App.css";
 
-export default function App() {
-  // Example small interaction for header CTA
-  const [hello, setHello] = useState(false);
+// Lazy-load pages
+const Home = lazy(() => import("./pages/Home.jsx"));
+const Arcade = lazy(() => import("./pages/Arcade.jsx"));
+const NotFound = lazy(() => import("./pages/NotFound.jsx"));
 
+export default function App() {
   return (
     <div className="site">
       <header className="nav">
         <div className="container nav-inner">
           <div className="brand">vhalgarv<span>.com</span></div>
           <nav className="menu">
-            <a href="#arcade">Arcade</a>
-            <a href="#about">Sobre mí</a>
-            <a href="#contact">Contacto</a>
+            <NavLink to="/" end>Inicio</NavLink>
+            <NavLink to="/arcade">Arcade</NavLink>
           </nav>
-          <button className="btn primary" onClick={() => setHello(true)}>
-            {hello ? "¡Hola! 👋" : "Salúdame"}
-          </button>
         </div>
       </header>
 
       <main>
-        <section className="hero">
-          <div className="container hero-grid">
-            <div className="hero-text">
-              <h1>Pequeño laboratorio web</h1>
-              <p>
-                Experimentos, minijuegos y notas mientras aprendo diseño web, React y Vite.
-                Aquí iré publicando cosillas chulas y pruebas.
-              </p>
-              <div className="cta-row">
-                <a className="btn primary" href="#arcade">Jugar ahora</a>
-                <a className="btn ghost" href="#about">Saber más</a>
-              </div>
-            </div>
-            <div className="hero-card">
-              <div className="stat">
-                <span className="stat-number">⚡️</span>
-                <span className="stat-label">Vite + React</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">🎮</span>
-                <span className="stat-label">Mini-Arcade</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">🛠️</span>
-                <span className="stat-label">WIP constante</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="arcade" className="arcade">
-          <div className="container">
-            <h2>Mini Arcade</h2>
-            <p className="subtle">
-              Empezamos con Tetris. Próximos: Snake, Pong, y algún puzzle.
-            </p>
-            <div className="game-wrap">
-              <Tetris />
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="about">
-          <div className="container about-grid">
-            <div>
-              <h3>Sobre mí</h3>
-              <p>
-                Soy vhalgarv y esta es mi web personal. Estoy aprendiendo frontend y
-                probando ideas. Aquí documento el progreso y subo mini-proyectos.
-              </p>
-            </div>
-            <ul className="pill-list">
-              <li>React + Vite</li>
-              <li>CI/CD en AWS</li>
-              <li>Vanilla CSS</li>
-            </ul>
-          </div>
-        </section>
-
-        <section id="contact" className="contact">
-          <div className="container">
-            <h3>Contacto</h3>
-            <p className="subtle">¿Feedback o ideas? ¡Encantado de leerte!</p>
-            <a className="btn primary" href="mailto:hello@vhalgarv.com">Escríbeme</a>
-          </div>
-        </section>
+        <div className="container">
+          <Suspense fallback={<div className="loading">Cargando…</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/arcade/*" element={<ArcadeLayout />}>
+                <Route index element={<Arcade />} />
+                {/* Nested routes inside Arcade */}
+                <Route path="tetris" element={<Arcade game="tetris" />} />
+                <Route path="snake"  element={<Arcade game="snake"  />} />
+                <Route path="pong"   element={<Arcade game="pong"   />} />
+                <Route path="puzzle" element={<Arcade game="puzzle" />} />
+                <Route path="jeweled" element={<Arcade game="jeweled" />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </div>
       </main>
 
       <footer className="footer">
@@ -102,5 +51,21 @@ export default function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+// Layout wrapper to show Arcade sub-navigation
+function ArcadeLayout() {
+  return (
+    <>
+      <div className="tabs">
+        <NavLink to="/arcade/tetris" className="tab">Tetris</NavLink>
+        <NavLink to="/arcade/snake"  className="tab">Snake</NavLink>
+        <NavLink to="/arcade/pong"   className="tab">Pong</NavLink>
+        <NavLink to="/arcade/puzzle" className="tab">Puzzle</NavLink>
+        <NavLink to="/arcade/jeweled" className="tab">Jeweled</NavLink>
+      </div>
+      <Outlet />
+    </>
   );
 }

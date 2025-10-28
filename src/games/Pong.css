@@ -1,0 +1,18 @@
+/* games/Pong.css */
+
+.pong-wrap {
+  display: grid;
+  grid-template-columns: 220px auto;
+  gap: 16px;
+  align-items: start;
+}
+.pong-hud { display: grid; gap: 8px; align-content: start; color: #ddd; }
+.pong-hud .row { display: flex; gap: 8px; }
+.pong-hud .over { color: #ff595e; font-weight: 700; }
+.help { opacity: .8; }
+.pong-canvas {
+  border: 2px solid #2c2c2c;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0,0,0,.45);
+  background: #0f0f10;
+}

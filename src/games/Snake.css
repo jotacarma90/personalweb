@@ -1,0 +1,42 @@
+/* games/Snake.css */
+
+.snake-wrap {
+  display: grid;
+  grid-template-columns: 220px auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.snake-hud { display: grid; gap: 8px; align-content: start; color: #ddd; }
+.snake-hud .row { display: flex; gap: 8px; }
+.snake-hud .over { color: #ff595e; font-weight: 700; }
+.help { opacity: .8; }
+
+.snake-board {
+  width: fit-content;
+  display: grid;
+  background-color: #0f0f10;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 20px 20px;       /* debe coincidir con el tamaño de celda */
+  border: 2px solid #2c2c2c;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(0,0,0,.45);
+}
+
+.cell {
+  width: 20px;                       /* tamaño de celda */
+  height: 20px;
+}
+
+.cell.snake {
+  background: #7c5cff;
+  outline: 1px solid rgba(255,255,255,.15);
+  border-radius: 2px;
+}
+
+.cell.food {
+  background: #43aa8b;
+  border-radius: 50%;
+}

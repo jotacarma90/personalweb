@@ -1,0 +1,46 @@
+/* src/games/Jeweled.css */
+
+.j-wrap {
+  display: grid;
+  grid-template-columns: 220px auto;
+  gap: 16px;
+  align-items: start;
+}
+
+.j-hud { display: grid; gap: 8px; align-content: start; color: #ddd; }
+.j-hud .row { display: flex; gap: 8px; }
+.j-msg { color: #e6d066; }
+.help { opacity: .8; }
+
+.j-board {
+  width: fit-content;
+  display: grid;
+  background: #0f0f10;
+  padding: 6px;
+  border: 2px solid #2c2c2c;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,.45);
+  gap: 4px; /* spacing between gems */
+}
+
+/* Gem cells as buttons */
+.j-cell {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid #2a2d33;
+  background: #191b1e;
+  cursor: pointer;
+  padding: 0;
+  transition: transform .06s ease;
+}
+.j-cell:hover { transform: translateY(-1px); }
+.j-cell.selected { outline: 2px solid #6ee7ff; }
+
+/* Simple color palette for 6 gem types */
+.gem-1 { background: #f94144; }
+.gem-2 { background: #f8961e; }
+.gem-3 { background: #f9c74f; color:#0b0b0c; }
+.gem-4 { background: #43aa8b; }
+.gem-5 { background: #577590; }
+.gem-6 { background: #7c5cff; }

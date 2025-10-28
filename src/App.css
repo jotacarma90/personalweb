@@ -80,3 +80,24 @@
 .footer { border-top: 1px solid #1e2023; padding: 18px 0; color: var(--muted); }
 .footer .container { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .sep { opacity: .6; }
+
+/* Tabs for Arcade */
+.tabs {
+  display: flex; gap: 8px; margin: 20px 0 14px;
+  flex-wrap: wrap;
+}
+.tab {
+  padding: 8px 12px; border-radius: 999px;
+  border: 1px solid #2a2d33; text-decoration: none; color: var(--muted);
+  background: var(--panel); transition: .15s background, .15s color;
+}
+.tab:hover { background: var(--panel-2); color: var(--text); }
+.tab.active, .tab[aria-current="page"] {
+  color: #0b0b0c; background: linear-gradient(135deg, var(--brand), #6ee7ff);
+  border-color: transparent; font-weight: 700;
+}
+
+/* Card / helpers */
+.card { background: var(--panel); border: 1px solid #2a2d33; border-radius: 14px; padding: 16px; }
+.loading { opacity: .8; padding: 16px 0; }
+.empty { opacity: .8; padding: 12px 0; }
